@@ -22,11 +22,14 @@ function Home() {
   return (
     <Layout className='bg-red-100'>
       Home
-      {
-        items?.map((item) => {
-          return <Card />
-        })
-      }
+      <div className="grid gap-4 grid-cols-4 w-full max-w-screen-lg">
+        {
+          items?.map(item => {
+            return <Card key={item.id} data={item} />
+          })
+        }
+      </div>
+
 
     </Layout>
   )
