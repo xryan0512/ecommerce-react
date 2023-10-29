@@ -1,20 +1,27 @@
+import { useContext } from 'react'
 import './product-detail.css'
-import { XMarkIcon } from '@heroicons/react/24/solid'
+
+import { ShoppingCartContext } from '../../Context'
 
 const ProductDetail = () => {
+    const { productToShow } = useContext(ShoppingCartContext)
+    const { images, title, price, description } = productToShow
+
 
     return (
-        <aside
-            className="product-detail flex flex-col fixed bg-white right-0 border border-black rounded">
-            <div className="flex justify-between items-center p-6">
-                <h2 className="font-medium text-xl">
-                    Detail
-                </h2>
-                <div>
-                    <XMarkIcon className='h-6 w-6 text-black'></XMarkIcon>
-                </div>
-            </div>
-        </aside>
+        <div>
+            <h2 className="pl-6 pb-3 font-medium text-xl">
+                Details
+            </h2>
+            <figure className='px-6'>
+                <img className='w-full h-full rounded-lg' src={images} alt={title} />
+            </figure>
+            <p className='flex flex-col p-6'>
+                <span className='font-medium text-2xl mb-2'>${price}</span>
+                <span className='font-medium text-md'>{title}</span>
+                <span className='font-medium text-sm'>{description}</span>
+            </p>
+        </div>
     )
 }
 
