@@ -3,6 +3,7 @@ import Card from "../../components/Card"
 import Layout from "../../components/Layout"
 import { apiUrl } from "../../Api"
 import ProductDetail from "../../components/ProductDetails";
+import SideMenu from "../../components/SideMenu";
 
 function Home() {
   const [items, setItems] = useState(null);
@@ -30,7 +31,7 @@ function Home() {
           })
         }
       </div>
-      <ProductDetail />
+      <SideMenu />
 
     </Layout>
   )
