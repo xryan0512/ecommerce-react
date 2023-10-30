@@ -1,13 +1,25 @@
 import { useContext } from 'react'
 import { ShoppingCartContext } from '../../Context'
-
+import { totalPrice } from '../../utils'
 
 const CheckoutSideCart = () => {
-    const { cartProducts, deleteCartProduct } = useContext(ShoppingCartContext)
-
+    const { cartProducts, deleteCartProduct, setOrder, order, setCartProducts } = useContext(ShoppingCartContext)
     const deleteCartItem = (index) => {
         deleteCartProduct(index)
     }
+
+    const handleCheckout = () => {
+        const orderToAdd = {
+            date: Date.now(),
+            products: cartProducts,
+            totalProducts: cartProducts.length,
+            totalPrice: totalPrice(cartProducts)
+        }
+
+        setOrder([...order, orderToAdd])
+        setCartProducts([])
+    }
+
     return (
         <div className='overflow-y-scroll'>
             <h2 className="pl-6 pb-3 font-medium text-xl">
@@ -17,7 +29,7 @@ const CheckoutSideCart = () => {
                 cartProducts.map((item, index) => (
                     <div className='border-y-4' key={item.id}>
 
-                        <div className='flex flex-1 grow-0 justify-between mt-3 shadow-lg rounded-md '>
+                        <div className='flex grow-0 justify-between mt-3 shadow-lg rounded-md '>
                             <div className='p-2 w-20 '>
                                 <img src={item.images} alt="" />
                             </div>
@@ -31,6 +43,14 @@ const CheckoutSideCart = () => {
                     </div>
                 ))
             }
+            <div className='px-6 mb-6'>
+                <p className='flex justify-between items-center pt-2'>
+                    <span className="font-medium">Total</span>
+                    <span className='font-medium text-xl'> ${totalPrice(cartProducts)}</span>
+                </p>
+
+                <button className='bg-black py-3 mt-6 text-white rounded-lg w-full' onClick={() => handleCheckout()}>Checkout</button>
+            </div>
         </div>
 
 

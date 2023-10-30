@@ -23,12 +23,14 @@ export const ShoppingCartProvider = ({ children }) => {
         cartProducts.splice(index, 1)
         setCartProducts([...arr])
     }
-
+    //Show options Cart | Detail product
     const [optionSideMenu, setOptionSideMenu] = useState('')
     const optSelectedSideMenu = (opt) => {
         setIsProductDetailOpen(true)
         setOptionSideMenu(opt)
     }
+    //Checkout Order
+    const [order, setOrder] = useState([])
     return (
         <ShoppingCartContext.Provider value={{
             counter,
@@ -42,7 +44,9 @@ export const ShoppingCartProvider = ({ children }) => {
             setCartProducts,
             deleteCartProduct,
             optSelectedSideMenu,
-            optionSideMenu
+            optionSideMenu,
+            order,
+            setOrder
         }}>
             {children}
         </ShoppingCartContext.Provider>
